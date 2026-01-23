@@ -1,8 +1,8 @@
 /*
 Theme Name: Andre Portfolio
-Theme URI: https://didodesign.com.br
+Theme URI: https://didodsgn.com.br/
 Author: Andre Ostheimer
-Author URI: https://didodesign.com.br
+Author URI: https://didodsgn.com.br/
 Description: Custom portfolio theme
 Version: 1.0
 */
@@ -55,3 +55,4 @@ Version: 1.0
 .main-nav a.active::after {
     width: 100%;
 }
+
