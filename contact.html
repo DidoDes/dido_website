@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - dido.dsgn</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Commissioner', Arial, sans-serif;
+            background: #000;
+            color: #fff;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+
+        /* Header */
+        header {
+            padding: 40px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .name {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .name a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .header-link {
+            font-size: 16px;
+            color: #fff;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .header-link:hover {
+            opacity: 0.6;
+        }
+
+        .header-link.active {
+            text-decoration: underline;
+        }
+
+        /* Contact Content */
+        .contact-content {
+            padding: 120px 0;
+            min-height: 60vh;
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .contact-intro h1 {
+            font-size: 48px;
+            font-weight: 400;
+            margin-bottom: 40px;
+            letter-spacing: -1px;
+        }
+
+        .contact-intro p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #aaa;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .form-group label span {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            font-family: 'Commissioner', Arial, sans-serif;
+            font-size: 16px;
+            padding: 12px 0;
+            border: none;
+            border-bottom: 1px solid #333;
+            background: transparent;
+            color: #fff;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-bottom-color: #fff;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-btn {
+            font-family: 'Commissioner', Arial, sans-serif;
+            font-size: 16px;
+            padding: 15px 40px;
+            background: #000;
+            color: #fff;
+            border: 1px solid #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: fit-content;
+        }
+
+        .submit-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            border-top: 1px solid #333;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 60px;
+        }
+
+        .footer-section h3 {
+            font-size: 16px;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+
+        .footer-section p {
+            font-size: 14px;
+            line-height: 1.8;
+            margin: 0;
+            color: #aaa;
+        }
+
+        .footer-section a {
+            color: #fff;
+            text-decoration: underline;
+            display: block;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            opacity: 0.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            header {
+                padding: 30px 0;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .name {
+                font-size: 18px;
+            }
+
+            .header-nav {
+                width: 100%;
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            .contact-content {
+                padding: 80px 0;
+            }
+
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .contact-intro h1 {
+                font-size: 36px;
+            }
+
+            .contact-intro p {
+                font-size: 16px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h3 class="name">
+                    <a href="index.html">dido.dsgn</a>
+                </h3>
+                
+                <nav class="header-nav">
+                    <a href="index.html" class="header-link">Projects</a>
+                    <a href="about.html" class="header-link">About me</a>
+                    <a href="contact.html" class="header-link active">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="contact-content">
+        <div class="container">
+            <div class="contact-wrapper">
+                <div class="contact-intro">
+                    <h1>Contact me</h1>
+                    <p>Have a project or an idea in mind? I’d love to hear about it. Let’s transform ideas into something tangible. Reach out if you want to collaborate or just start a conversation.</p>
+                </div>
+
+                <form class="contact-form" action="#" method="POST">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Name <span>(obrigatório)</span></label>
+                            <input type="text" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name <span>(obrigatório)</span></label>
+                            <input type="text" name="surname" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email <span>(obrigatório)</span></label>
+                        <input type="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Client or Project Title <span>(obrigatório)</span></label>
+                        <input type="text" name="project" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Message <span>(obrigatório)</span></label>
+                        <textarea name="message" required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Submit</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>André Ostheimer</h3>
+                    <p>São Paulo, Brasil</p>
+                    <p>Copyright © 2026 dido.dsgn</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <a href="mailto:hey@didodesign.com.br">hey@didodesign.com.br</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Follow me on</h3>
+                    <a href="https://www.instagram.com/dido.dsgn/" target="_blank">Instagram</a>
+                    <a href="https://www.behance.net/andre_ostheimer" target="_blank">Behance</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
