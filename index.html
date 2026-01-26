@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>dido.dsgn</title>
+    <link rel="icon" type="image/png" href="dido_white.png">
+    <link rel="apple-touch-icon" href="dido_white.png">
+    <title>Contact - dido.dsgn</title>
     <style>
         * {
             margin: 0;
@@ -40,10 +42,23 @@
             font-size: 20px;
             font-weight: 700;
             letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        .name span {
-            display: inline-block;
+        .name a {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
         }
 
         .header-nav {
@@ -57,7 +72,6 @@
             color: #fff;
             text-decoration: none;
             transition: opacity 0.3s;
-            position: relative;
         }
 
         .header-link:hover {
@@ -68,152 +82,99 @@
             text-decoration: underline;
         }
 
-        /* Hero Section (inside header) */
-        .hero {
-            max-width: 100%;
-            margin-top: 60px;
+        /* Contact Content */
+        .contact-content {
+            padding: 120px 0;
+            min-height: 60vh;
         }
 
-        .hero h2 {
-            font-size: 36px;
-            font-weight: 400;
-            line-height: 1.2;
-            margin-bottom: 0;
-            letter-spacing: -1px;
-        }
-
-        .hero p {
-            font-size: 26px;
-            font-weight: 400;
-            line-height: 1;
-            letter-spacing: -1px;
-        }
-
-        /* Filter Tabs */
-        .filter-tabs {
-            padding: 40px 0 30px;
-            border-bottom: 1px solid #333;
-            position: sticky;
-            top: 0;
-            background: #000;
-            z-index: 100;
-        }
-
-        .tabs {
-            display: flex;
-            gap: 30px;
-        }
-
-        .tab {
-            font-size: 16px;
-            color: #fff;
-            text-decoration: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            transition: opacity 0.3s;
-            font-weight: 400;
-        }
-
-        .tab:hover {
-            opacity: 0.6;
-        }
-
-        .tab.active {
-            text-decoration: underline;
-        }
-
-        .tab.inactive {
-            color: #666;
-        }
-
-        /* Projects Section */
-        .projects-section {
-            padding: 50px 0 80px;
-        }
-
-        .section-hidden {
-            display: none;
-        }
-
-        .projects-grid {
+        .contact-wrapper {
             display: grid;
-            grid-template-columns: repeat(12, 1fr);
+            grid-template-columns: 1fr 2fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .contact-intro h1 {
+            font-size: 48px;
+            font-weight: 400;
+            margin-bottom: 40px;
+            letter-spacing: -1px;
+        }
+
+        .contact-intro p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #aaa;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
             gap: 30px;
-            grid-auto-rows: 300px;
         }
 
-        .project {
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .form-group label span {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            font-family: 'Commissioner', Arial, sans-serif;
+            font-size: 16px;
+            padding: 12px 0;
+            border: none;
+            border-bottom: 1px solid #333;
+            background: transparent;
+            color: #fff;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-bottom-color: #fff;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-btn {
+            font-family: 'Commissioner', Arial, sans-serif;
+            font-size: 16px;
+            padding: 15px 40px;
+            background: #000;
+            color: #fff;
+            border: 1px solid #fff;
             cursor: pointer;
-            transition: transform 0.3s, opacity 0.3s;
-            overflow: hidden;
-            background: #111;
+            transition: all 0.3s;
+            width: fit-content;
         }
 
-        .project:hover {
-            transform: scale(1.02);
-            z-index: 10;
-        }
-
-        .project-media {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-media video,
-        .project-media img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Creative Grid Layout */
-        .project:nth-child(1) {
-            grid-column: span 8;
-            grid-row: span 2;
-        }
-
-        .project:nth-child(2) {
-            grid-column: span 4;
-            grid-row: span 1;
-        }
-
-        .project:nth-child(3) {
-            grid-column: span 4;
-            grid-row: span 1;
-        }
-
-        .project:nth-child(4) {
-            grid-column: span 5;
-            grid-row: span 2;
-        }
-
-        .project:nth-child(5) {
-            grid-column: span 7;
-            grid-row: span 2;
-        }
-
-        .project:nth-child(6) {
-            grid-column: span 6;
-            grid-row: span 1;
-        }
-
-        .project:nth-child(7) {
-            grid-column: span 6;
-            grid-row: span 1;
-        }
-
-        .project:nth-child(8) {
-            grid-column: span 7;
-            grid-row: span 2;
-        }
-
-        .project:nth-child(9) {
-            grid-column: span 5;
-            grid-row: span 2;
+        .submit-btn:hover {
+            background: #fff;
+            color: #000;
         }
 
         /* Footer */
@@ -259,57 +220,6 @@
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
-
-            .projects-grid {
-                grid-template-columns: repeat(6, 1fr);
-                grid-auto-rows: 250px;
-                gap: 20px;
-            }
-
-            .project:nth-child(1) {
-                grid-column: span 6;
-                grid-row: span 2;
-            }
-
-            .project:nth-child(2) {
-                grid-column: span 3;
-                grid-row: span 1;
-            }
-
-            .project:nth-child(3) {
-                grid-column: span 3;
-                grid-row: span 1;
-            }
-
-            .project:nth-child(4) {
-                grid-column: span 6;
-                grid-row: span 2;
-            }
-
-            .project:nth-child(5) {
-                grid-column: span 6;
-                grid-row: span 2;
-            }
-
-            .project:nth-child(6) {
-                grid-column: span 3;
-                grid-row: span 1;
-            }
-
-            .project:nth-child(7) {
-                grid-column: span 3;
-                grid-row: span 1;
-            }
-
-            .project:nth-child(8) {
-                grid-column: span 6;
-                grid-row: span 2;
-            }
-
-            .project:nth-child(9) {
-                grid-column: span 6;
-                grid-row: span 2;
-            }
         }
 
         @media (max-width: 768px) {
@@ -318,11 +228,10 @@
             }
 
             header {
-                padding: 30px 0 50px;
+                padding: 30px 0;
             }
 
             .header-content {
-                position: relative;
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 20px;
@@ -330,7 +239,6 @@
 
             .name {
                 font-size: 18px;
-                padding-right: 40px;
             }
 
             .header-nav {
@@ -340,84 +248,26 @@
                 align-items: flex-start;
             }
 
-            .hero {
-                margin-top: 40px;
+            .contact-content {
+                padding: 80px 0;
             }
 
-            .hero h2 {
-                font-size: 32px;
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+                gap: 40px;
             }
 
-            .hero p {
-                font-size: 22px;
+            .contact-intro h1 {
+                font-size: 36px;
             }
 
-            .filter-tabs {
-                padding: 30px 0 20px;
+            .contact-intro p {
+                font-size: 16px;
             }
 
-            .tabs {
+            .form-row {
+                grid-template-columns: 1fr;
                 gap: 20px;
-                flex-wrap: wrap;
-            }
-
-            .tab {
-                font-size: 15px;
-            }
-
-            .projects-section {
-                padding: 30px 0 60px;
-            }
-
-            .projects-grid {
-                grid-template-columns: repeat(2, 1fr);
-                grid-auto-rows: 200px;
-                gap: 15px;
-            }
-
-            .project:nth-child(1) {
-                grid-column: span 2;
-                grid-row: span 2;
-            }
-
-            .project:nth-child(2) {
-                grid-column: span 1;
-                grid-row: span 1;
-            }
-
-            .project:nth-child(3) {
-                grid-column: span 1;
-                grid-row: span 1;
-            }
-
-            .project:nth-child(4) {
-                grid-column: span 1;
-                grid-row: span 1;
-            }
-
-            .project:nth-child(5) {
-                grid-column: span 1;
-                grid-row: span 1;
-            }
-
-            .project:nth-child(6) {
-                grid-column: span 2;
-                grid-row: span 1;
-            }
-
-            .project:nth-child(7) {
-                grid-column: span 1;
-                grid-row: span 1;
-            }
-
-            .project:nth-child(8) {
-                grid-column: span 1;
-                grid-row: span 1;
-            }
-
-            .project:nth-child(9) {
-                grid-column: span 2;
-                grid-row: span 1;
             }
         }
     </style>
@@ -427,126 +277,58 @@
         <div class="container">
             <div class="header-content">
                 <h3 class="name">
-                    <a href="index.html" style="text-decoration: none; color: inherit;">
+                    <a href="index.html">
+                        <img src="dido_white.png" alt="dido.dsgn logo" class="logo-img">
                         <span>dido.dsgn</span>
                     </a>
                 </h3>
                 
                 <nav class="header-nav">
-                    <a href="index.html" class="header-link active">Projects</a>
+                    <a href="index.html" class="header-link">Projects</a>
                     <a href="about.html" class="header-link">About me</a>
-                    <a href="contact.html" class="header-link">Contact</a>
+                    <a href="contact.html" class="header-link active">Contact</a>
                 </nav>
-            </div>
-
-            <div class="hero">
-                <h3>Hey! I'm André</h3>
-                <p>Motion Designer</p>
             </div>
         </div>
     </header>
 
-    <section class="filter-tabs">
+    <section class="contact-content">
         <div class="container">
-            <div class="tabs">
-                <button class="tab active" data-section="all">All</button>
-                <button class="tab inactive" data-section="clients">Clients</button>
-                <button class="tab inactive" data-section="personal">Personal</button>
-                <button class="tab inactive" data-section="interactive">Interactive</button>
-            </div>
-        </div>
-    </section>
+            <div class="contact-wrapper">
+                <div class="contact-intro">
+                    <h1>Contact me</h1>
+                    <p>Have a project or an idea in mind? I'd love to hear about it. Let's transform ideas into something tangible. Reach out if you want to collaborate or just start a conversation.</p>
+                </div>
 
-    <!-- All Projects Section -->
-    <section class="projects-section" id="projects" data-category="all">
-        <div class="container">
-            <div class="projects-grid">
-                <article class="project">
-                    <div class="project-media">
-                        <!-- Add your video here: <video src="your-video.mp4" autoplay muted loop playsinline></video> -->
+                <form class="contact-form" action="#" method="POST">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Name <span>(obrigatório)</span></label>
+                            <input type="text" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name <span>(obrigatório)</span></label>
+                            <input type="text" name="surname" required>
+                        </div>
                     </div>
-                </article>
-                <article class="project">
-                    <div class="project-media"></div>
-                </article>
-                <article class="project">
-                    <div class="project-media"></div>
-                </article>
-                <article class="project">
-                    <div class="project-media"></div>
-                </article>
-                <article class="project">
-                    <div class="project-media"></div>
-                </article>
-                <article class="project">
-                    <div class="project-media"></div>
-                </article>
-                <article class="project">
-                    <div class="project-media"></div>
-                </article>
-                <article class="project">
-                    <div class="project-media"></div>
-                </article>
-                <article class="project">
-                    <div class="project-media"></div>
-                </article>
-            </div>
-        </div>
-    </section>
 
-    <!-- Clients Section -->
-    <section class="projects-section section-hidden" data-category="clients">
-        <div class="container">
-            <div class="projects-grid">
-                <article class="project">
-                    <div class="project-media">
-                        <!-- Clients projects here -->
+                    <div class="form-group">
+                        <label>Email <span>(obrigatório)</span></label>
+                        <input type="email" name="email" required>
                     </div>
-                </article>
-                <article class="project">
-                    <div class="project-media"></div>
-                </article>
-                <article class="project">
-                    <div class="project-media"></div>
-                </article>
-            </div>
-        </div>
-    </section>
 
-    <!-- Personal Section -->
-    <section class="projects-section section-hidden" data-category="personal">
-        <div class="container">
-            <div class="projects-grid">
-                <article class="project">
-                    <div class="project-media">
-                        <!-- Personal projects here -->
+                    <div class="form-group">
+                        <label>Client or Project Title <span>(obrigatório)</span></label>
+                        <input type="text" name="project" required>
                     </div>
-                </article>
-                <article class="project">
-                    <div class="project-media"></div>
-                </article>
-                <article class="project">
-                    <div class="project-media"></div>
-                </article>
-            </div>
-        </div>
-    </section>
 
-    <!-- Interactive Section -->
-    <section class="projects-section section-hidden" data-category="interactive">
-        <div class="container">
-            <div class="projects-grid">
-                <article class="project">
-                    <div class="project-media">
-                        <!-- Interactive projects here -->
+                    <div class="form-group">
+                        <label>Message <span>(obrigatório)</span></label>
+                        <textarea name="message" required></textarea>
                     </div>
-                </article>
-                <article class="project">
-                    <div class="project-media"></div>
-                </article>
-                <article class="project">
-                    <div class="project-media"></div>
-                </article>
+
+                    <button type="submit" class="submit-btn">Submit</button>
+                </form>
             </div>
         </div>
     </section>
@@ -573,71 +355,5 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        // Filter tabs functionality to show/hide sections
-        const tabs = document.querySelectorAll('.tab');
-        const sections = document.querySelectorAll('.projects-section');
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const targetSection = tab.getAttribute('data-section');
-                
-                // Update tab states
-                tabs.forEach(t => {
-                    t.classList.remove('active');
-                    t.classList.add('inactive');
-                });
-                tab.classList.remove('inactive');
-                tab.classList.add('active');
-                
-                // Show/hide sections
-                sections.forEach(section => {
-                    const category = section.getAttribute('data-category');
-                    if (category === targetSection) {
-                        section.classList.remove('section-hidden');
-                    } else {
-                        section.classList.add('section-hidden');
-                    }
-                });
-            });
-        });
-
-        // Simple fade-in animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.project').forEach(project => {
-            project.style.opacity = '0';
-            project.style.transform = 'translateY(30px)';
-            project.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(project);
-        });
-
-        // Auto-play videos on hover
-        document.querySelectorAll('.project').forEach(project => {
-            const video = project.querySelector('video');
-            if (video) {
-                project.addEventListener('mouseenter', () => {
-                    video.play();
-                });
-                project.addEventListener('mouseleave', () => {
-                    video.pause();
-                    video.currentTime = 0;
-                });
-            }
-        });
-    </script>
 </body>
 </html>
