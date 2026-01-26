@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="dido_white.png">
+    <link rel="apple-touch-icon" href="dido_white.png">
     <title>Contact - dido.dsgn</title>
     <style>
         * {
@@ -40,11 +42,23 @@
             font-size: 20px;
             font-weight: 700;
             letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .name a {
             text-decoration: none;
             color: inherit;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
         }
 
         .header-nav {
@@ -263,7 +277,10 @@
         <div class="container">
             <div class="header-content">
                 <h3 class="name">
-                    <a href="index.html">dido.dsgn</a>
+                    <a href="index.html">
+                        <img src="dido_white.png" alt="dido.dsgn logo" class="logo-img">
+                        <span>dido.dsgn</span>
+                    </a>
                 </h3>
                 
                 <nav class="header-nav">
@@ -280,7 +297,7 @@
             <div class="contact-wrapper">
                 <div class="contact-intro">
                     <h1>Contact me</h1>
-                    <p>Have a project or an idea in mind? I’d love to hear about it. Let’s transform ideas into something tangible. Reach out if you want to collaborate or just start a conversation.</p>
+                    <p>Have a project or an idea in mind? I'd love to hear about it. Let's transform ideas into something tangible. Reach out if you want to collaborate or just start a conversation.</p>
                 </div>
 
                 <form class="contact-form" action="#" method="POST">
