@@ -1,0 +1,58 @@
+/*
+Theme Name: Andre Portfolio
+Theme URI: https://didodsgn.com.br/
+Author: Andre Ostheimer
+Author URI: https://didodsgn.com.br/
+Description: Custom portfolio theme
+Version: 1.0
+*/
+
+/* Header */
+.site-header {
+    padding: 32px 0;
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo */
+.logo {
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: -0.2px;
+}
+
+/* Navigation */
+.main-nav {
+    display: flex;
+    gap: 28px;
+}
+
+.main-nav a {
+    font-size: 14px;
+    color: #000;
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 4px;
+}
+
+/* Active / hover underline */
+.main-nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 1px;
+    background: #000;
+    transition: width 0.3s ease;
+}
+
+.main-nav a:hover::after,
+.main-nav a.active::after {
+    width: 100%;
+}
+
