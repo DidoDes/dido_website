@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiments - dido.dsgn</title>
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="assets/fonts/Commissioner-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    
+    <style>
+        @font-face {
+            font-family: 'Commissioner';
+            src: url('assets/fonts/Commissioner-Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Commissioner';
+            src: url('assets/fonts/Commissioner-Medium.ttf') format('truetype');
+            font-weight: 500;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Commissioner';
+            src: url('assets/fonts/Commissioner-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Commissioner', sans-serif;
+            background: #000;
+            color: #fff;
+            line-height: 1.5;
+            /* Disable content selection */
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+        }
+
+        /* Prevent dragging */
+        img, video {
+            -webkit-user-drag: none;
+            
+        }
+
+        /* Allow interaction with text and links */
+        a, button, p, h1, h2, h3 {
+            user-select: auto;
+            -webkit-user-select: auto;
+            pointer-events: auto;
+        }
+
+        .container {
+            max-width: 2000px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+
+        /* Header */
+        header {
+            padding: 45px 0;
+            border-bottom: 1px solid #333;
+            position: sticky;
+            top: 0;
+            background: #000;
+            z-index: 200;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .name {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .name a {
+            text-decoration: none;
+            color: inherit;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .name a:hover {
+            opacity: 0.6;
+        }
+
+        .logo-img {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .header-link {
+            font-size: 16px;
+            color: #fff;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            position: relative;
+        }
+
+        .header-link:hover {
+            opacity: 0.6;
+        }
+
+        .header-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: #fff;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 8px;
+            gap: 4px;
+            z-index: 350;
+            position: relative;
+        }
+
+        .mobile-menu-toggle span {
+            width: 24px;
+            height: 2px;
+            background: #fff;
+            transition: all 0.3s;
+            transform-origin: center;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #000;
+            z-index: 300;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            transform: translateX(0);
+        }
+
+        .mobile-menu-content {
+            text-align: center;
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 45px;
+            right: 60px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-menu-close::before,
+        .mobile-menu-close::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 2px;
+            background: #fff;
+        }
+
+        .mobile-menu-close::before {
+            transform: rotate(45deg);
+        }
+
+        .mobile-menu-close::after {
+            transform: rotate(-45deg);
+        }
+
+        .mobile-menu-content a {
+            display: block;
+            font-size: 28px;
+            color: #fff;
+            text-decoration: none;
+            margin: 25px 0;
+            transition: opacity 0.3s;
+        }
+
+        .mobile-menu-content a:hover {
+            opacity: 0.6;
+        }
+
+        /* Experiments Section */
+        .experiments-section {
+            padding: 80px 0 120px;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 400;
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+        }
+
+        .section-description {
+            font-size: 18px;
+            color: #888;
+            margin-bottom: 60px;
+            max-width: 800px;
+        }
+
+        /* Behold Instagram Widget Container */
+        [data-behold-id] {
+            margin-bottom: 80px;
+        }
+
+        /* Loading placeholder */
+        .instagram-placeholder {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .instagram-placeholder h4 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #888;
+        }
+
+        .instagram-placeholder p {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            border-top: 1px solid #333;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 60px;
+        }
+
+        .footer-section h3 {
+            font-size: 16px;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+
+        .footer-section p {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #aaa;
+        }
+
+        .footer-section a {
+            color: #fff;
+            text-decoration: underline;
+            display: block;
+            font-size: 14px;
+            line-height: 1.8;
+            transition: opacity 0.3s;
+        }
+
+        .footer-section a:hover {
+            opacity: 0.6;
+        }
+
+        .footer-section:nth-child(2) {
+            text-align: center;
+        }
+
+        .footer-section:nth-child(3) {
+            text-align: right;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-section:nth-child(2),
+            .footer-section:nth-child(3) {
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            header {
+                padding: 30px 0;
+            }
+
+            .name {
+                font-size: 18px;
+            }
+
+            .header-nav {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .mobile-menu-close {
+                right: 20px;
+            }
+
+            .experiments-section {
+                padding: 60px 0 80px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .section-description {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h3 class="name">
+                    <a href="index.html">
+                        <img src="assets/dido_white.png" alt="dido.dsgn logo" class="logo-img">
+                        <span>dido.dsgn</span>
+                    </a>
+                </h3>
+                
+                <nav class="header-nav">
+                    <a href="index.html" class="header-link">Projects</a>
+                    <a href="experiments.html" class="header-link active">Experiments</a>
+                    <a href="about.html" class="header-link">About</a>
+                </nav>
+
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-menu-overlay">
+        <div class="mobile-menu-close"></div>
+        <div class="mobile-menu-content">
+            <a href="index.html">Projects</a>
+            <a href="experiments.html">Experiments</a>
+            <a href="about.html">About</a>
+        </div>
+    </div>
+
+    <section class="experiments-section">
+        <div class="container">
+            <h2 class="section-title">Experiments</h2>
+            <p class="section-description">Motion design experiments, creative coding, and visual explorations from my Instagram.</p>
+            
+            <!-- Instagram Posts Grid - Powered by Behold -->
+            <div data-behold-id="8xGHAtENHRcshW5HD3lT"></div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>André Ostheimer</h3>
+                    <p>São Paulo, Brasil</p>
+                    <p>Copyright © 2026 dido.dsgn</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <a href="/cdn-cgi/l/email-protection#2b434e526b4f424f444f4e58424c4505484446054959"><span class="__cf_email__" data-cfemail="771f120e37131e13181312041e10195914181a591505">[email&#160;protected]</span></a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Follow me on</h3>
+                    <a href="https://www.instagram.com/dido.dsgn/" target="_blank">Instagram</a>
+                    <a href="https://www.behance.net/andre_ostheimer" target="_blank">Behance</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Behold Instagram Widget Script -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script>
+        (function() {
+            const d=document,s=d.createElement("script");s.type="module";
+            s.src="https://w.behold.so/widget.js";d.head.append(s);
+        })();
+    </script>
+
+    <script>
+        // === IMAGE/VIDEO PROTECTION ===
+        
+        // Disable right-click context menu
+        document.addEventListener('contextmenu', function(e) {
+            if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Disable drag and drop
+        document.addEventListener('dragstart', function(e) {
+            if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Disable keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // === MOBILE MENU ===
+        
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+        const mobileMenuClose = document.querySelector('.mobile-menu-close');
+        const mobileMenuLinks = document.querySelectorAll('.mobile-menu-content a');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenuToggle.classList.toggle('active');
+            mobileMenuOverlay.classList.toggle('active');
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenuToggle.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+        });
+
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuToggle.classList.remove('active');
+                mobileMenuOverlay.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

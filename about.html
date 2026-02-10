@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - dido.dsgn</title>
+    <style>
+        @font-face {
+            font-family: 'Commissioner';
+            src: url('assets/fonts/Commissioner-Regular.ttf') format('truetype');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Commissioner';
+            src: url('assets/fonts/Commissioner-Medium.ttf') format('truetype');
+            font-weight: 500;
+        }
+        @font-face {
+            font-family: 'Commissioner';
+            src: url('assets/fonts/Commissioner-Bold.ttf') format('truetype');
+            font-weight: 700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Commissioner', sans-serif;
+            background: #000;
+            color: #fff;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 2000px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+
+        /* Header */
+        header {
+            padding: 45px 0;
+            border-bottom: 1px solid #333;
+            position: sticky;
+            top: 0;
+            background: #000;
+            z-index: 200;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .name {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .name a {
+            text-decoration: none;
+            color: inherit;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .name a:hover {
+            opacity: 0.6;
+        }
+
+        .logo-img {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .header-link {
+            font-size: 16px;
+            color: #fff;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            position: relative;
+        }
+
+        .header-link:hover {
+            opacity: 0.6;
+        }
+
+        .header-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: #fff;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 8px;
+            gap: 4px;
+            z-index: 350;
+            position: relative;
+        }
+
+        .mobile-menu-toggle span {
+            width: 24px;
+            height: 2px;
+            background: #fff;
+            transition: all 0.3s;
+            transform-origin: center;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #000;
+            z-index: 300;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            transform: translateX(0);
+        }
+
+        .mobile-menu-content {
+            text-align: center;
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 45px;
+            right: 60px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-menu-close::before,
+        .mobile-menu-close::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 2px;
+            background: #fff;
+        }
+
+        .mobile-menu-close::before {
+            transform: rotate(45deg);
+        }
+
+        .mobile-menu-close::after {
+            transform: rotate(-45deg);
+        }
+
+        .mobile-menu-content a {
+            display: block;
+            font-size: 28px;
+            color: #fff;
+            text-decoration: none;
+            margin: 25px 0;
+            transition: opacity 0.3s;
+        }
+
+        .mobile-menu-content a:hover {
+            opacity: 0.6;
+        }
+
+        /* About Content */
+        .about-section {
+            padding: 80px 0 120px;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            align-items: start;
+        }
+
+        .about-text h1 {
+            font-size: 48px;
+            font-weight: 400;
+            letter-spacing: -1px;
+            margin-bottom: 40px;
+            line-height: 1.2;
+        }
+
+        .about-text p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 24px;
+        }
+
+        .about-image {
+            width: 200%;
+            max-width: 450px; /* Limit maximum width */
+            aspect-ratio: 3/4;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            position: sticky;
+            top: 220px; /* Space from top when sticky */
+            margin-left: auto; /* Align to right side of grid column */
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none; /* Hidden, used only for ASCII conversion */
+        }
+
+        /* ASCII Art Container */
+        .ascii-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Courier New', monospace;
+            font-size: 8px;
+            line-height: 8px;
+            letter-spacing: 2px; /* Add horizontal spacing to match vertical */
+            white-space: pre;
+            overflow: hidden;
+            color: #fff;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .skills-section {
+            margin-top: 80px;
+            padding-top: 60px;
+            border-top: 1px solid #333;
+        }
+
+        .skills-section h2 {
+            font-size: 32px;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+            margin-bottom: 40px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .skill-item h3 {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 12px;
+            letter-spacing: -0.3px;
+        }
+
+        .skill-item p {
+            font-size: 14px;
+            color: #888;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            border-top: 1px solid #333;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 60px;
+        }
+
+        .footer-section h3 {
+            font-size: 16px;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+
+        .footer-section p {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #aaa;
+        }
+
+        .footer-section a {
+            color: #fff;
+            text-decoration: underline;
+            display: block;
+            font-size: 14px;
+            line-height: 1.8;
+            transition: opacity 0.3s;
+        }
+
+        .footer-section a:hover {
+            opacity: 0.6;
+        }
+
+        .footer-section:nth-child(2) {
+            text-align: center;
+        }
+
+        .footer-section:nth-child(3) {
+            text-align: right;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .about-image {
+                max-width: 100%; /* Full width on mobile */
+                margin-left: 0;
+                position: relative; /* Remove sticky on mobile */
+                top: auto;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-section:nth-child(2),
+            .footer-section:nth-child(3) {
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            header {
+                padding: 30px 0;
+            }
+
+            .name {
+                font-size: 18px;
+            }
+
+            .header-nav {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .mobile-menu-close {
+                right: 20px;
+            }
+
+            .about-section {
+                padding: 60px 0 80px;
+            }
+
+            .about-text h1 {
+                font-size: 36px;
+            }
+
+            .about-text p {
+                font-size: 16px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h3 class="name">
+                    <a href="index.html">
+                        <img src="assets/dido_white.png" alt="dido.dsgn logo" class="logo-img">
+                        <span>dido.dsgn</span>
+                    </a>
+                </h3>
+                
+                <nav class="header-nav">
+                    <a href="index.html" class="header-link">Projects</a>
+                    <a href="experiments.html" class="header-link">Experiments</a>
+                    <a href="about.html" class="header-link active">About</a>
+                    
+                </nav>
+
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-menu-overlay">
+        <div class="mobile-menu-close"></div>
+        <div class="mobile-menu-content">
+            <a href="index.html">Projects</a>
+            <a href="experiments.html">Experiments</a>
+            <a href="about.html">About</a>
+            
+        </div>
+    </div>
+
+    <section class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h1>Hi, I'm André Ostheimer</h1>
+                    <p>I'm a graphic / motion designer based in São Paulo, Brazil. I specialize in creating dynamic visual systems, interactive experiences, and real-time graphics.</p>
+                    <p>My work sits at the intersection of design and technology, combining branding, motion design, and creative coding to create engaging digital experiences.</p>
+                    <p>With a background in graphic design and a passion for experimental visuals, I explore the possibilities of generative art, interactive installations, and motion systems that respond to user input.</p>
+                </div>
+                
+                <div class="about-image">
+                    <img src="assets/AndréOstheimer.png" alt="André Ostheimer" id="sourceImage" crossorigin="anonymous">
+                    <div class="ascii-container" id="asciiContainer"></div>
+                </div>
+            </div>
+
+            <div class="skills-section">
+                <h2>What I Do</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <h3>Motion Design</h3>
+                        <p>Creating dynamic brand identities and motion systems that bring visual concepts to life.</p>
+                    </div>
+                    <div class="skill-item">
+                        <h3>Creative Coding</h3>
+                        <p>Building interactive experiences using p5.js, Processing, and other creative tools.</p>
+                    </div>
+                    <div class="skill-item">
+                        <h3>Real-Time Graphics</h3>
+                        <p>Developing generative visuals and interactive installations for live performances.</p>
+                    </div>
+                    <div class="skill-item">
+                        <h3>Branding</h3>
+                        <p>Designing cohesive visual identities that work across digital and physical spaces.</p>
+                    </div>
+                    <div class="skill-item">
+                        <h3>Web Design</h3>
+                        <p>Creating engaging digital experiences with modern web technologies.</p>
+                    </div>
+                    <div class="skill-item">
+                        <h3>Video Production</h3>
+                        <p>Producing compelling motion graphics and video content for various platforms.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>André Ostheimer</h3>
+                    <p>São Paulo, Brasil</p>
+                    <p>Copyright © 2026 dido.dsgn</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <a href="/cdn-cgi/l/email-protection#432b263a03272a272c2726302a242d6d202c2e6d2131"><span class="__cf_email__" data-cfemail="3e565b477e5a575a515a5b4d575950105d5153105c4c">[email&#160;protected]</span></a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Follow me on</h3>
+                    <a href="https://www.instagram.com/dido.dsgn/" target="_blank">Instagram</a>
+                    <a href="https://www.behance.net/andre_ostheimer" target="_blank">Behance</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Mobile menu
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+        const mobileMenuClose = document.querySelector('.mobile-menu-close');
+        const mobileMenuLinks = document.querySelectorAll('.mobile-menu-content a');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenuToggle.classList.toggle('active');
+            mobileMenuOverlay.classList.toggle('active');
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenuToggle.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+        });
+
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuToggle.classList.remove('active');
+                mobileMenuOverlay.classList.remove('active');
+            });
+        });
+
+        // === ASCII ART EFFECT ===
+        
+        class AsciiArt {
+            constructor(imageId, containerId) {
+                this.image = document.getElementById(imageId);
+                this.container = document.getElementById(containerId);
+                this.canvas = document.createElement('canvas');
+                this.ctx = this.canvas.getContext('2d');
+                
+                // ASCII characters from darkest to lightest
+                this.chars = '@%#*+=-:. ';
+                
+                this.init();
+            }
+
+            init() {
+                // Wait for image to load
+                if (this.image.complete) {
+                    this.convert();
+                } else {
+                    this.image.addEventListener('load', () => this.convert());
+                }
+
+                // Reconvert on window resize
+                let resizeTimer;
+                window.addEventListener('resize', () => {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(() => this.convert(), 250);
+                });
+            }
+
+            convert() {
+                const containerWidth = this.container.offsetWidth;
+                const containerHeight = this.container.offsetHeight;
+                
+                // Character dimensions - adjusted for proper aspect ratio
+                // Courier New characters are roughly 0.6 width/height ratio
+                const fontSize = 8;
+                const letterSpacing = 2;
+                const charWidth = fontSize * 0.6 + letterSpacing;
+                const charHeight = fontSize;
+                
+                const cols = Math.floor(containerWidth / charWidth);
+                const rows = Math.floor(containerHeight / charHeight);
+
+                // Set canvas size
+                this.canvas.width = cols;
+                this.canvas.height = rows;
+
+                // Draw image to canvas maintaining aspect ratio
+                this.ctx.drawImage(this.image, 0, 0, cols, rows);
+
+                // Get image data
+                const imageData = this.ctx.getImageData(0, 0, cols, rows);
+                const pixels = imageData.data;
+
+                // Convert to ASCII
+                let ascii = '';
+                for (let i = 0; i < rows; i++) {
+                    let line = '';
+                    for (let j = 0; j < cols; j++) {
+                        const offset = (i * cols + j) * 4;
+                        const r = pixels[offset];
+                        const g = pixels[offset + 1];
+                        const b = pixels[offset + 2];
+                        
+                        // Calculate brightness
+                        const brightness = (r + g + b) / 3;
+                        
+                        // Map brightness to character
+                        const charIndex = Math.floor((brightness / 255) * (this.chars.length - 1));
+                        line += this.chars[this.chars.length - 1 - charIndex];
+                    }
+                    ascii += line + '\n';
+                }
+
+                // Display ASCII art
+                this.container.textContent = ascii;
+            }
+        }
+
+        // Initialize ASCII art effect
+        window.addEventListener('DOMContentLoaded', () => {
+            new AsciiArt('sourceImage', 'asciiContainer');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1922 - dido.dsgn</title>
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="../../assets/fonts/Commissioner-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    
+    <style>
+        @font-face {
+            font-family: 'Commissioner';
+            src: url('../../assets/fonts/Commissioner-Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Commissioner';
+            src: url('../../assets/fonts/Commissioner-Medium.ttf') format('truetype');
+            font-weight: 500;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Commissioner';
+            src: url('../../assets/fonts/Commissioner-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Commissioner', sans-serif;
+            background: #000;
+            color: #fff;
+            line-height: 1.5;
+            /* Disable content selection and dragging */
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        /* Prevent video/image dragging and context menu */
+        img, video {
+            pointer-events: none;
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            
+        }
+
+        /* Allow interaction with text and links */
+        a, button, p, h1, h2, h3, input, textarea {
+            user-select: auto;
+            -webkit-user-select: auto;
+            pointer-events: auto;
+        }
+
+        .container {
+            max-width: 2000px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+
+        /* Header */
+        header {
+            padding: 45px 0;
+            border-bottom: 1px solid #333;
+            position: sticky;
+            top: 0;
+            background: #000;
+            z-index: 200;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .name {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .name a {
+            text-decoration: none;
+            color: inherit;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .name a:hover {
+            opacity: 0.6;
+        }
+
+        .logo-img {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .header-link {
+            font-size: 16px;
+            color: #fff;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            position: relative;
+        }
+
+        .header-link:hover {
+            opacity: 0.6;
+        }
+
+        .header-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: #fff;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 8px;
+            gap: 4px;
+            z-index: 350;
+            position: relative;
+        }
+
+        .mobile-menu-toggle span {
+            width: 24px;
+            height: 2px;
+            background: #fff;
+            transition: all 0.3s;
+            transform-origin: center;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #000;
+            z-index: 300;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            transform: translateX(0);
+        }
+
+        .mobile-menu-content {
+            text-align: center;
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 45px;
+            right: 60px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-menu-close::before,
+        .mobile-menu-close::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 2px;
+            background: #fff;
+        }
+
+        .mobile-menu-close::before {
+            transform: rotate(45deg);
+        }
+
+        .mobile-menu-close::after {
+            transform: rotate(-45deg);
+        }
+
+        .mobile-menu-content a {
+            display: block;
+            font-size: 28px;
+            color: #fff;
+            text-decoration: none;
+            margin: 25px 0;
+            transition: opacity 0.3s;
+        }
+
+        .mobile-menu-content a:hover {
+            opacity: 0.6;
+        }
+
+        /* Main Hero Video */
+        .main-video-section {
+            padding: 80px 0 0;
+        }
+
+        .main-video-container {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #111;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .main-video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: none;
+        }
+
+        /* Project Info */
+        .project-info-section {
+            padding: 60px 0;
+        }
+
+        .project-title {
+            font-size: 48px;
+            font-weight: 600;
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+        }
+
+        .project-subtitle {
+            font-size: 20px;
+            color: #888;
+            font-weight: 400;
+            margin-bottom: 40px;
+        }
+
+        .project-description {
+            max-width: 1300px;
+        }
+
+        .project-description p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 24px;
+        }
+
+        /* Media Grid */
+        .media-grid-section {
+            padding: 60px 0 120px;
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .media-grid-item {
+            width: 100%;
+            aspect-ratio: 16/10;
+            background: #111;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .media-grid-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Lazy loading placeholder */
+        .media-grid-item video.lazy {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .media-grid-item video.lazy-loaded {
+            opacity: 1;
+        }
+
+        /* Loading indicator */
+        .media-grid-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: #111;
+            z-index: 1;
+            opacity: 1;
+            transition: opacity 0.3s;
+        }
+
+        .media-grid-item.loaded::before {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Full width media items */
+        .media-grid-item.full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            border-top: 1px solid #333;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 60px;
+        }
+
+        .footer-section h3 {
+            font-size: 16px;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+
+        .footer-section p {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #aaa;
+        }
+
+        .footer-section a {
+            color: #fff;
+            text-decoration: underline;
+            display: block;
+            font-size: 14px;
+            line-height: 1.8;
+            transition: opacity 0.3s;
+        }
+
+        .footer-section a:hover {
+            opacity: 0.6;
+        }
+
+        .footer-section:nth-child(2) {
+            text-align: center;
+        }
+
+        .footer-section:nth-child(3) {
+            text-align: right;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .media-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-section:nth-child(2),
+            .footer-section:nth-child(3) {
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            header {
+                padding: 30px 0;
+            }
+
+            .name {
+                font-size: 18px;
+            }
+
+            .header-nav {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .mobile-menu-close {
+                right: 20px;
+            }
+
+            .main-video-section {
+                padding: 60px 0 0;
+            }
+
+            .project-info-section {
+                padding: 40px 0;
+            }
+
+            .project-title {
+                font-size: 32px;
+            }
+
+            .project-subtitle {
+                font-size: 18px;
+            }
+
+            .project-description p {
+                font-size: 16px;
+            }
+
+            .media-grid-section {
+                padding: 40px 0 80px;
+            }
+
+            .media-grid {
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h3 class="name">
+                    <a href="../../index.html">
+                        <img src="../../assets/dido_white.png" alt="dido.dsgn logo" class="logo-img">
+                        <span>dido.dsgn</span>
+                    </a>
+                </h3>
+                
+                <nav class="header-nav">
+                    <a href="../../index.html" class="header-link active">Projects</a>
+                    <a href="../../experiments.html" class="header-link">Experiments</a>
+                    <a href="../../about.html" class="header-link">About</a>
+                </nav>
+
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-menu-overlay">
+        <div class="mobile-menu-close"></div>
+        <div class="mobile-menu-content">
+            <a href="../../index.html">Projects</a>
+            <a href="../../experiments.html">Experiments</a>
+            <a href="../../about.html">About</a>
+        </div>
+    </div>
+
+    <!-- Main Video at Top -->
+    <section class="main-video-section">
+        <div class="container">
+            <div class="main-video-container">
+                <!-- Main hero video - loads immediately -->
+                <video autoplay loop muted playsinline preload="metadata">
+                    <source src="../../projects/cachaça_1922/videos - imgs/01_Main_Cachaça 1922.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Title and Description -->
+    <section class="project-info-section">
+        <div class="container">
+            <h1 class="project-title">Cachaça 1922</h1>
+            <p class="project-subtitle">Video Editing</p>
+            
+            <div class="project-description">
+                <p>This video editing project was created to highlight the premium essence of Cachaça 1922, translating its tradition, authenticity, and sophistication into a clean and impactful visual narrative.</p>
+                <p>The edit focuses on light, rhythm, and composition to emphasize the bottle's details, the liquid's texture, and the brand's artisanal character. Every cut was carefully designed to build a sensory experience, reinforcing 1922's positioning as a high-end cachaça made for unique and incomparable moments.</p>
+                <p>The main challenge was balancing elegance and intensity without overstatement, allowing the product to speak for itself. The result is a refined, timeless video that strengthens the brand's digital presence and bridges heritage with a contemporary visual language.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Media Grid -->
+    <section class="media-grid-section">
+        <div class="container">
+            <div class="media-grid">
+                <!-- Grid Item 1 -->
+                <div class="media-grid-item">
+                    <video class="lazy" loop muted playsinline preload="none" data-src="../../projects/cachaça_1922/videos - imgs/01 cachaça 1922 storyframe.mp4">
+                        <source data-src="../../projects/cachaça_1922/videos - imgs/01 cachaça 1922 storyframe.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <!-- Grid Item 2 -->
+                <div class="media-grid-item">
+                    <video class="lazy" loop muted playsinline preload="none" data-src="../../projects/cachaça_1922/videos - imgs/02 cachaça 1922 storyframe.mp4">
+                        <source data-src="../../projects/cachaça_1922/videos - imgs/02 cachaça 1922 storyframe.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <!-- Grid Item 3 -->
+                <div class="media-grid-item">
+                    <video class="lazy" loop muted playsinline preload="none" data-src="../../projects/cachaça_1922/videos - imgs/03 cachaça 1922 storyframe.mp4">
+                        <source data-src="../../projects/cachaça_1922/videos - imgs/03 cachaça 1922 storyframe.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <!-- Grid Item 4 -->
+                <div class="media-grid-item">
+                    <video class="lazy" loop muted playsinline preload="none" data-src="../../projects/cachaça_1922/videos - imgs/04 cachaça 1922 storyframe.mp4">
+                        <source data-src="../../projects/cachaça_1922/videos - imgs/04 cachaça 1922 storyframe.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <!-- Grid Item 5 -->
+                <div class="media-grid-item">
+                    <video class="lazy" loop muted playsinline preload="none" data-src="../../projects/cachaça_1922/videos - imgs/05 cachaça 1922 storyframe.mp4">
+                        <source data-src="../../projects/cachaça_1922/videos - imgs/05 cachaça 1922 storyframe.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <!-- Grid Item 6 -->
+                <div class="media-grid-item">
+                    <video class="lazy" loop muted playsinline preload="none" data-src="../../projects/cachaça_1922/videos - imgs/06 cachaça 1922 storyframe.mp4">
+                        <source data-src="../../projects/cachaça_1922/videos - imgs/06 cachaça 1922 storyframe.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <!-- Grid Item 7 -->
+                <div class="media-grid-item">
+                    <video class="lazy" loop muted playsinline preload="none" data-src="../../projects/cachaça_1922/videos - imgs/07 cachaça 1922 storyframe.mp4">
+                        <source data-src="../../projects/cachaça_1922/videos - imgs/07 cachaça 1922 storyframe.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <!-- Grid Item 8 -->
+                <div class="media-grid-item">
+                    <video class="lazy" loop muted playsinline preload="none" data-src="../../projects/cachaça_1922/videos - imgs/08 cachaça 1922 storyframe.mp4">
+                        <source data-src="../../projects/cachaça_1922/videos - imgs/08 cachaça 1922 storyframe.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>André Ostheimer</h3>
+                    <p>São Paulo, Brasil</p>
+                    <p>Copyright © 2026 dido.dsgn</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <a href="mailto:hey@didodesign.com.br">hey@didodesign.com.br</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Follow me on</h3>
+                    <a href="https://www.instagram.com/dido.dsgn/" target="_blank">Instagram</a>
+                    <a href="https://www.behance.net/andre_ostheimer" target="_blank">Behance</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // === IMAGE/VIDEO PROTECTION ===
+        
+        // Disable right-click context menu
+        document.addEventListener('contextmenu', function(e) {
+            if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Disable drag and drop
+        document.addEventListener('dragstart', function(e) {
+            if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Disable keyboard shortcuts for saving
+        document.addEventListener('keydown', function(e) {
+            // Disable Ctrl+S / Cmd+S
+            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                e.preventDefault();
+                return false;
+            }
+            // Disable Print Screen (doesn't fully work but adds layer)
+            if (e.key === 'PrintScreen') {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // === LAZY LOADING FOR GRID VIDEOS ===
+        
+        const lazyVideos = document.querySelectorAll('video.lazy');
+        
+        const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const video = entry.target;
+                    const source = video.querySelector('source');
+                    const container = video.closest('.media-grid-item');
+                    
+                    if (source && source.dataset.src) {
+                        // Set the source
+                        source.src = source.dataset.src;
+                        video.load();
+                        
+                        // Remove lazy class and add loaded
+                        video.classList.remove('lazy');
+                        video.classList.add('lazy-loaded');
+                        
+                        // Mark container as loaded
+                        if (container) {
+                            container.classList.add('loaded');
+                        }
+                        
+                        // Auto play when video can play
+                        video.addEventListener('canplay', function() {
+                            video.play().catch(e => {
+                                // Autoplay might be blocked, that's okay
+                                console.log('Autoplay prevented:', e);
+                            });
+                        });
+                        
+                        videoObserver.unobserve(video);
+                    }
+                }
+            });
+        }, {
+            rootMargin: '100px' // Start loading 100px before entering viewport
+        });
+
+        // Observe all lazy videos
+        lazyVideos.forEach(video => {
+            videoObserver.observe(video);
+        });
+
+        // === MOBILE MENU ===
+        
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+        const mobileMenuClose = document.querySelector('.mobile-menu-close');
+        const mobileMenuLinks = document.querySelectorAll('.mobile-menu-content a');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenuToggle.classList.toggle('active');
+            mobileMenuOverlay.classList.toggle('active');
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenuToggle.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+        });
+
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuToggle.classList.remove('active');
+                mobileMenuOverlay.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
